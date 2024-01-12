@@ -1,0 +1,25 @@
+\/*	Ajouter la maquette d'une fenêtre
+	#1 : Option pour l'ajout de l'image
+	#2 : Nom de l'image (doit se trouver dans le dossier 'Annexe/Maquette' depuis la racine du projet LaTeX)
+	#3 : Le nom de l'image
+	#4 : L'identifiant de la maquette
+	Corps : Description de la fenêtre
+*/
+\newenvironment{maquette}[4][width=15cm]{%
+	\begin{figure}[htbp]
+		\centering
+		\fbox{\includegraphics[#1]{../Annexe/Maquette/#2}}
+		\caption{#3}
+		\label{maquette:#4}
+	\end{figure}
+	\begin{minipage}{15cm}
+}{%
+	\end{minipage}
+}
+\subsection{Maquettes}
+\begin{maquette}{logicielTotal.png}{Le logiciel au grand complet}{logicielle}
+	L’écran d’accueil du jeu
+	\begin{itemize}
+		\item Nouvelle partie :
+	\end{itemize}
+\end{maquette}

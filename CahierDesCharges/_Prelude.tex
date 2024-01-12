@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%
+% PACKAGE %
+%%%%%%%%%%%%%%%
+% Mise en page
+\usepackage[margin=3cm]{geometry} % Définition des dimension de la page et des marges
+\usepackage{fancyhdr} % Gérer la mise en page
+\usepackage{lastpage} % Obtenir le numéro de la dernière page
+\usepackage{pdflscape} % Permet de mettre des pages en paysage (n'adapte pas les marges)
+%\usepackage{lscape} % Permet de mettre des pages en paysage (tourne la page)
+% Typographie
+\usepackage[french]{babel} % Ob tenir la typographie du francais
+\usepackage[T1]{fontenc} % Options de typographies
+\usepackage[utf8]{inputenc} % Codage des caractère
+% Insertion
+\usepackage{graphicx} % Ajouter des images
+\usepackage{hyperref} % Ajouter des liens
+\usepackage{longtable} % Faire des tableaux sur plusieurs pages
+% Couleurs
+\usepackage{color} % Ajouter de la couleur
+\usepackage{colortbl} % Colorier les tableaux
+% LaTeX Programming
+\usepackage{ifthen} % Ajout des fonctions conditionnel
+\usepackage{pgf} % Ajout de macro dynamique
+\usepackage{pgffor} % Ajout de la boucle for
+\usepackage{etoolbox} % Ajout des conteneurs de données
+
+
+%%%%%%%%%%%%%%%
+% Informations %
+%%%%%%%%%%%%%%%
+\newcommand{\wPt}{\textcolor{white}{.}}
+\newcommand{\titre}{GL2-Gr5 : Kakuro Project} % Titre du document
+\newcommand{\auteur}{% Auteurs du documents
+	Lucas GOUDET ;
+	Julien HOUGET ;
+	Marwan LAHMAR ;\\
+	Hoa LE LUET ;
+	Erwan PECHON ;
+	Luca POURCEAU ;\\
+	Mewen PUREN
+}% Auteurs du documents
+\newcommand{\orga}{MCG Corp}
+\newcommand{\organisation}{Mangeurs de Cartes Graphiques Corporation}
+\newcommand{\univ}{{\textbf % Info sur l'organisation des auteurs du document
+	{\color{blue}Le Mans Université}\\
+	Licence Informatique
+	\textit{3ème année}\\
+	Génie Logiciel 2\\
+	\organisation (\orga)
+}} % Info sur l'organisation des auteurs du document
+
+
+%%%%%%%%%%%%%%%
+% Mise en page %
+%%%%%%%%%%%%%%%
+\pagestyle{fancy} % Mettre les options de mise en page à toutes les pages sauf la première
+\lhead{\orga} % Mettre la liste des auteurs en haut à gauche
+\rhead{\titre} % Mettre le titre du document en haut à droite
+\rfoot{\thepage/\pageref{LastPage}} % Mettre le numéro de la page en bas à droite
+\renewcommand\headrulewidth{1pt} % Filet de séparation de l'en-tête
+\setlength{\headheight}{14pt}
+
+
+%%%%%%%%%%%%%%%
+% COMPTEUR %
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+% COMMANDE %
+%%%%%%%%%%%%%%%
+\newcommand{\executable}{kakuro.exec}
+
+\input{_prelude_fonctionnalite}
+
+%%%%%%%%%%%%%%%
+% ENVIRONMENT %
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+% FIN %
+%%%%%%%%%%%%%%%

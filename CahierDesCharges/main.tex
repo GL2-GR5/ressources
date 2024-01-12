@@ -1,0 +1,33 @@
+\documentclass[a4paper,11pt]{article}
+\long\def\/*#1*/{}
+
+\input{_Prelude.tex}
+\usepackage{import}
+
+\title{\univ\\\textbf{\titre}}
+\author{\auteur}
+
+\begin{document}
+	% Ajout des logos de l'université
+	\begin{figure}
+		\includegraphics[scale=0.25]{Annexe/logo_LMU.png}
+		\hfill
+		\includegraphics[scale=0.15]{Annexe/logo_ic2.png}
+	\end{figure}
+	\vfill
+
+	% Ajout des informations du document
+	\maketitle
+	\vfill
+	\newpage
+
+	\tableofcontents
+	\newpage
+
+	\subimport{Introduction}{main}
+	\subimport{GestionDeProjet}{main}
+	\subimport{Besoins}{main}
+	\subimport{Fonctionnalités}{main}
+	\subimport{Contraintes}{main}
+	\subimport{Divers}{main}
+\end{document}

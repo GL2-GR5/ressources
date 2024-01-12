@@ -1,0 +1,111 @@
+%%%%%%%%%%%%%%%
+% COMPTEUR %
+%%%%%%%%%%%%%%%
+
+\newcounter{fonction}
+\setcounter{fonction}{0}
+\renewcommand{\thefonction}{\ifnum\value{fonction}<10 0\fi\arabic{fonction}}
+\newcounter{subfonction}[fonction]
+\setcounter{subfonction}{0}
+\newcounter{nbfonction}
+\setcounter{nbfonction}{0}
+\newcounter{idfonction}
+\setcounter{idfonction}{0}
+\newcounter{debListeFonction}
+\setcounter{debListeFonction}{0}
+
+%%%%%%%%%%%%%%%
+% COMMANDE %
+%%%%%%%%%%%%%%%
+
+%%%%%
+% Ajout d'une fonctionnalité
+\newcommand{\descrFonctionList}{}% Initialise la liste de suavegarde des descr
+\newcommand{\lireSubFonctionList}{}
+
+\newcommand{\ajouterDescrSousFonction}[2]{%
+	\listcsxadd{descrSubFoncList#1}{#2}
+}
+
+
+\newcommand{\fonction}[3]{%
+	% Incrémenter le nombre de fonctionnalité
+	\stepcounter{nbfonction}%
+	% Incrémenter le compteur dépendant du rang de la fonctionnalité
+	\refstepcounter{fonction}%
+	% Associer le label à la nouvelle fonction
+	\label{fonction:\arabic{nbfonction}}%
+	% Créer la liste des description des sous-fonctions
+	\setcounter{idfonction}{\arabic{nbfonction}}
+	% Afficher la référence de la fonctionnalité et un résumer succint
+	BF\thefonction{} : #1 &%
+	\begin{minipage}{10cm}%
+		#2%
+	\end{minipage}\\%
+	\hline%
+	\listxadd{\descrFonctionList}{BF\thefonction{} : #1 : #3}
+	\ifthenelse{ \equal{\value{nbfonction}}{\value{idfonction}} }
+		{}{\listxadd{\lireSubFonctionList}{\arabic{idfonction}}}
+}
+
+% Définire l'en-tête du tableau de définition des fonctionnalité.
+\newcommand{\enTeteFonctionPrincipal}{
+	\rowcolor{blue}
+	\textbf{{\color{white} Référence}} &
+	\textbf{{\color{white} Fonctions}} \\
+	\hline
+}
+
+\newcommand{\obtenirFonctionPrincipal}[1]{%
+	% Afficher les fonctionnalité dans un tableau
+	\begin{tabular}{|c|c|} \hline%
+		\enTeteFonctionPrincipal%
+		\input{#1}\\% Lire tous les fichiers de fonctionnalité.
+		\enTeteFonctionPrincipal%
+	\end{tabular}
+}
+\newcommand{\decrireFonctionPrincipal}[1]{%
+	% Lister toutes les fonctionnalité obtenur par \obtenirFonctionPrincipal et les associé à leurs descriptions longues.
+	Détail des \arabic{nbfonction} fonctionnalité :%
+	\begin{itemize}%
+		\renewcommand*{\do}[1]
+		{%
+			\stepcounter{debListeFonction}%
+			\item \hyperref[fonction:\arabic{debListeFonction}]{Voir fonction}
+			##1%
+			\xifinlist{\arabic{debListeFonction}}{\lireSubFonctionList}
+			{
+				\setcounter{idfonction}{\arabic{debListeFonction}}
+				\begin{itemize}
+					\listerDescrSubFonction
+				\end{itemize}
+			}{}
+		}
+		\dolistloop{\descrFonctionList}
+	\end{itemize}
+}
+
+%%%%%
+% Ajout d'une sous-fonctionnalité
+\newcommand{\descrSubFonctionList}{}%
+\newcommand{\subfonction}[3]{%
+	% Incrémenter le nombre de fonctionnalité
+	\stepcounter{nbfonction}%
+	% Incrémenter le compteur dépendant du rang de la fonctionnalité
+	\refstepcounter{subfonction}%
+	% Associer le label à la nouvelle fonction
+	\label{fonction:\arabic{nbfonction}}%
+	% Afficher la référence de la fonctionnalité et un résumer succint
+	BF\thefonction{}.\thesubfonction{} : #1 : #2%
+	\ajouterDescrSousFonction{\arabic{idfonction}}{BF\thefonction{}.\thesubfonction{} : #1 : #3}%
+}
+
+\newcommand{\listerDescrSubFonction}{
+	% Lister toutes les sous-fonctionnalité de cette fonctionnalité et les associer à leur description détailler.
+	\renewcommand*{\do}[1]{%
+		\stepcounter{debListeFonction}%
+		\item \hyperref[fonction:\arabic{debListeFonction}]{Voir fonction}
+		##1%
+	}%
+	\dolistcsloop{descrSubFoncList\arabic{idfonction}}
+}
